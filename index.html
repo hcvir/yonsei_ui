@@ -1,73 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>학적정보조회 | 연세포털서비스</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Malgun Gothic","맑은 고딕",Arial,sans-serif;
+  font-size:12px;
+  background:#f4f4f4;
+  color:#222;
+}
+
+/* top */
+.header{
+  height:70px;
+  background:#06437a;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:700;
+  font-size:21px;
+}
+.logo-mark{
+  width:40px;height:40px;border:2px solid #fff;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.logo small{display:block;font-size:9px;font-weight:400}
+.top-menu{display:flex;align-items:center;gap:16px;font-size:12px}
+.badge{border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:4px 12px}
+.logout{border:1px solid #fff;border-radius:14px;padding:5px 12px}
+
+/* layout */
+.page{display:flex;min-height:calc(100vh - 70px)}
+.sidebar{
+  width:270px;
+  background:#fff;
+  border-right:1px solid #d6d6d6;
+}
+.search-area{
+  height:65px;
+  background:#06437a;
+  padding:18px 16px;
+  border-top:1px solid rgba(255,255,255,.2);
+}
+.search-row{
+  display:flex;
+  border-bottom:2px solid #fff;
+  color:white;
+}
+.search-row input{
+  flex:1;border:0;background:transparent;color:white;outline:none;
+}
+.search-row span{font-weight:700}
+
+.side-tabs{
+  display:flex;
+  gap:10px;
+  padding:22px 18px 18px;
+}
+.side-tab-main{
+  background:#ffc328;
+  color:#222;
+  border-radius:18px;
+  padding:9px 32px;
+  font-weight:700;
+}
+.side-tab-sub{
+  background:#777;
+  color:white;
+  border-radius:18px;
+  padding:9px 28px;
+  font-weight:700;
+}
+.menu{
+  border-top:1px solid #e2e2e2;
+}
+.menu-item{
+  height:40px;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+  border-bottom:1px solid #e4e4e4;
+  background:#fff;
+}
+.menu-item.folder::before{content:"▱";margin-right:7px;color:#666}
+.menu-item.sub{
+  height:28px;
+  padding-left:34px;
+  background:#fbf6ee;
+  font-size:12px;
+}
+.menu-item.active{
+  color:#0066c9;
+  font-weight:700;
+  text-decoration:underline;
+}
+
+/* content */
+.main{
+  flex:1;
+  background:#f5f5f5;
+}
+.tabbar{
+  height:55px;
+  background:#fff;
+  border-bottom:1px solid #ddd;
+  display:flex;
+  align-items:end;
+  padding-left:22px;
+}
+.top-tab{
+  height:36px;
+  padding:11px 18px;
+  color:#0066c9;
+  border-bottom:3px solid #0066c9;
+  font-weight:700;
+}
+.iconbar{
+  height:36px;
+  background:#fafafa;
+  border-bottom:1px solid #e2e2e2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 22px;
+  color:#777;
+}
+.content{
+  width:1390px;
+  padding:22px 18px 60px;
+}
+.card{
+  background:white;
+  border:1px solid #d0d0d0;
+  border-radius:3px;
+  margin-bottom:10px;
+  padding:20px 28px;
+}
+.card.compact{padding:14px 28px}
+.card.large{padding:18px 28px}
+.card-title{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:14px;
+  display:flex;
+  justify-content:space-between;
+}
+.btn{
+  border:1px solid #777;
+  background:#f9f9f9;
+  padding:5px 9px;
+  font-size:12px;
+}
+
+/* profile */
+.profile-grid{
+  display:grid;
+  grid-template-columns:130px 1fr 1fr 1fr;
+  gap:0 28px;
+}
+.photo{
+  width:130px;
+  height:180px;
+  border:1px solid #777;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.seal{
+  width:50px;height:50px;border:3px solid #1e5b9c;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;color:#1e5b9c;font-weight:700;
+}
+.info-col{
+  display:grid;
+  grid-template-columns:100px 1fr;
+  row-gap:16px;
+  align-content:start;
+}
+.label{font-weight:700;color:#444}
+.value{color:#222}
+.divider{
+  border-left:1px solid #ddd;
+  padding-left:28px;
+}
+
+/* tables */
+.info-table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+}
+.info-table th,.info-table td{
+  border:1px solid #ddd;
+  height:42px;
+  padding:8px 10px;
+  text-align:left;
+}
+.info-table th{
+  width:120px;
+  background:#f1f4f8;
+  font-weight:700;
+}
+.info-table td{background:#fff}
+
+.accordion-head{
+  height:38px;
+  border:1px solid #cfd5df;
+  padding:10px 14px;
+  color:#1681df;
+  font-weight:700;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:0;
+}
+.fold-row{
+  height:42px;
+  border:1px solid #cfd5df;
+  border-top:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 14px;
+  background:#fff;
+  font-size:13px;
+}
+.arrow{color:#999;font-size:18px}
+</style>
+</head>
+
 <body>
-  <div data-ndid="uuid-1o" data-app="1n" data-role="application">
-    <img data-ndid="4h">
-    <a aria-label="학사행정 선택됨" role="button" data-ndid="8r">학사행정</a>
-    <input type="text" aria-label="메뉴 검색" data-ndid="5a">
-    <a role="button" title="검색" data-ndid="5c"></a>
-    <a role="button" data-ndid="5f">학적</a>
-    <a role="button" data-ndid="5g">마이메뉴</a>
+<header class="header">
+  <div class="logo">
+    <div class="logo-mark">◎</div>
+    <div>연세포털서비스<small>YONSEI PORTAL SERVICE</small></div>
+  </div>
+  <div class="top-menu">
+    <span>학사행정</span>
+    <span>👤 학생(**********) 전기전자공학과</span>
+    <span class="badge">59:08</span>
+    <span class="logout">로그아웃</span>
+    <span>◎</span><span>⌂</span>
+  </div>
+</header>
 
-    <div role="tree" data-ndid="uuid-43">
-      <div aria-label="지도교수면담" role="treeitem" title="지도교수면담" data-ndid="dc">지도교수면담</div>
-      <div aria-label="APR" role="treeitem" title="APR" data-ndid="de">APR</div>
-
-      <div aria-expanded="true" aria-label="학생" role="treeitem" title="학생" data-ndid="dg">학생</div>
-      <div aria-checked="true" aria-label="학적정보조회" role="treeitem" title="학적정보조회" data-ndid="di">학적정보조회</div>
-      <div aria-label="학적부기재정정신청" role="treeitem" title="학적부기재정정신청" data-ndid="dk">학적부기재정정신청</div>
-      <div aria-label="휴학신청(대학원)" role="treeitem" title="휴학신청(대학원)" data-ndid="dm">휴학신청(대학원)</div>
-      <div aria-label="자원퇴학신청" role="treeitem" title="자원퇴학신청" data-ndid="do">자원퇴학신청</div>
-      <div aria-label="학생설계전공신청" role="treeitem" title="학생설계전공신청" data-ndid="dq">학생설계전공신청</div>
-      <div aria-label="학생설계전공포기" role="treeitem" title="학생설계전공포기" data-ndid="ds">학생설계전공포기</div>
-      <div aria-label="학위과정변경신청(석사-&gt;통합)" role="treeitem" title="학위과정변경신청(석사-&gt;통합)" data-ndid="du">학위과정변경신청(석사-&gt;통합)</div>
-      <div aria-label="학위과정중단신청(통합-&gt;석사)" role="treeitem" title="학위과정중단신청(통합-&gt;석사)" data-ndid="dw">학위과정중단신청(통합-&gt;석사)</div>
+<div class="page">
+  <aside class="sidebar">
+    <div class="search-area">
+      <div class="search-row">
+        <input value="SEARCH" />
+        <span>⌕</span>
+      </div>
     </div>
 
-    <div aria-label="Selected, 학적정보조회" role="tab">학적정보조회</div>
-    <div aria-label="Close" role="button" title="학적정보조회" data-ndid="dy"></div>
+    <div class="side-tabs">
+      <div class="side-tab-main">✓ 학적</div>
+      <div class="side-tab-sub">마이메뉴</div>
+    </div>
 
-    학적 / 학생 / 학적정보조회
+    <div class="menu">
+      <div class="menu-item folder">지도교수면담</div>
+      <div class="menu-item folder">APR</div>
+      <div class="menu-item folder">학생</div>
+      <div class="menu-item sub active">학적정보조회</div>
+      <div class="menu-item sub">학적부기재정정신청</div>
+      <div class="menu-item sub">휴학신청(대학원)</div>
+      <div class="menu-item sub">자원퇴학신청</div>
+      <div class="menu-item sub">학생설계전공신청</div>
+      <div class="menu-item sub">학생설계전공포기</div>
+      <div class="menu-item sub">학위과정변경신청(석사-&gt;통합)</div>
+      <div class="menu-item sub">학위과정중단신청(통합-&gt;석사)</div>
+    </div>
+  </aside>
 
-    프로필
-    학번: 2026314108
-    성명: 신해찬
-    영문성명: HAECHAN SHIN
-    주민등록번호: 010902-3******
-    학적상태: 재학
-    소속
-    학위과정
-    학기
-    국적
-    최종학적변동일자
+  <main class="main">
+    <div class="tabbar">
+      <div class="top-tab">학적정보조회 ×</div>
+    </div>
 
-    <img data-ndid="lf">
+    <div class="iconbar">
+      <div>⌂ 학적 〉 학생 〉 학적정보조회 ☰</div>
+      <div>⌃ ◎ ⟳ ? ☆</div>
+    </div>
 
-    계좌정보
-    은행구분
-    계좌번호
-    국민은행
-    9432020087****
+    <div class="content">
+      <section class="card">
+        <div class="card-title">
+          <span>프로필</span>
+          <button class="btn">개인정보변경</button>
+        </div>
 
-    <div aria-expanded="true" aria-label="학적정보" role="button" data-ndid="jw" data-itemidx="0">학적정보</div>
-    학기: 1
-    진급학기: 1
-    휴학최대학기: 6
-    휴학학기: 0
-    증서번호
-    학위번호
-    종합시험 합격일자
-    외국어시험 합격일자
-    수료/전문연구
-    수료일자
+        <div class="profile-grid">
+          <div class="photo"><div class="seal">YS</div></div>
 
-    <div aria-expanded="false" aria-label="입학정보" role="button" data-ndid="k1" data-itemidx="1">입학정보</div>
-    <div aria-expanded="false" aria-label="학적변동" role="button" data-ndid="k4" data-itemidx="2">학적변동</div>
-    <div aria-expanded="false" aria-label="전공정보" role="button" data-ndid="k7" data-itemidx="3">전공정보</div>
-    <div aria-expanded="false" aria-label="수강정보" role="button" data-ndid="ka" data-itemidx="4">수강정보</div>
-    <div aria-expanded="false" aria-label="성적정보" role="button" data-ndid="kd" data-itemidx="5">성적정보</div>
-    <div aria-expanded="false" aria-label="논문 및 시험" role="button" data-ndid="kg" data-itemidx="6">논문 및 시험</div>
-    <div aria-expanded="false" aria-label="등록정보" role="button" data-ndid="kj" data-itemidx="7">등록정보</div>
-    <div aria-expanded="false" aria-label="장학정보" role="button" data-ndid="km" data-itemidx="8">장학정보</div>
-    <div aria-expanded="false" aria-label="교직정보" role="button" data-ndid="kp" data-itemidx="9">교직정보</div>
-    <div aria-expanded="false" aria-label="경력정보" role="button" data-ndid="l1" data-itemidx="13">경력정보</div>
-  </div>
+          <div class="info-col">
+            <div class="label">학번</div><div class="value">**********</div>
+            <div class="label">성명</div><div class="value">***</div>
+            <div class="label">영문성명</div><div class="value">********</div>
+            <div class="label">주민등록번호</div><div class="value">******-*******</div>
+            <div class="label">학적상태</div><div class="value">재학</div>
+          </div>
+
+          <div class="info-col divider">
+            <div class="label">소속</div><div class="value">일반대학원 전기전자공학과</div>
+            <div class="label">학위과정</div><div class="value">통합</div>
+            <div class="label">학기</div><div class="value">1</div>
+            <div class="label">국적</div><div class="value">대한민국</div>
+            <div class="label">최종학적변동일자</div><div class="value"></div>
+          </div>
+
+          <div class="info-col divider">
+            <div class="label">휴대전화번호</div><div class="value">***-****-****</div>
+            <div class="label">전화번호</div><div class="value">***-****-****</div>
+            <div class="label">이메일</div><div class="value">********@yonsei.ac.kr</div>
+            <div class="label">우편번호</div><div class="value">*****</div>
+            <div class="label">주소</div><div class="value">서울 ********</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card compact">
+        <div class="card-title">
+          <span>계좌정보</span>
+          <button class="btn">계좌정보변경</button>
+        </div>
+        <table class="info-table">
+          <tr>
+            <th>은행구분</th><td>******</td>
+            <th>계좌번호</th><td>**************</td>
+            <th>예금주</th><td>***</td>
+          </tr>
+        </table>
+      </section>
+
+      <section class="card large">
+        <div class="accordion-head">
+          <span>학적정보</span><span>⌄</span>
+        </div>
+        <table class="info-table">
+          <tr>
+            <th>학기</th><td>1</td>
+            <th>진급학기</th><td>1</td>
+            <th>학기초과자</th><td>□</td>
+          </tr>
+          <tr>
+            <th>휴학최대학기</th><td>6</td>
+            <th>휴학학기</th><td>0</td>
+            <th>지도교수명</th><td>***</td>
+          </tr>
+          <tr>
+            <th>증서번호</th><td></td>
+            <th>학위번호</th><td></td>
+            <th></th><td></td>
+          </tr>
+          <tr>
+            <th>종합시험<br>합격일자</th><td></td>
+            <th>외국어시험<br>합격일자</th><td></td>
+            <th></th><td></td>
+          </tr>
+          <tr>
+            <th>수료/전문연구</th><td></td>
+            <th>수료일자</th><td></td>
+            <th>연구소</th><td></td>
+          </tr>
+        </table>
+
+        <div class="fold-row"><span>입학정보</span><span class="arrow">›</span></div>
+        <div class="fold-row"><span>학적변동</span><span class="arrow">›</span></div>
+        <div class="fold-row"><span>전공정보</span><span class="arrow">›</span></div>
+        <div class="fold-row"><span>수강정보</span><span class="arrow">›</span></div>
+        <div class="fold-row"><span>성적정보</span><span class="arrow">›</span></div>
+        <div class="fold-row"><span>논문 및 시험</span><span class="arrow">›</span></div>
+        <div class="fold-row"><span>등록정보</span><span class="arrow">›</span></div>
+        <div class="fold-row"><span>장학정보</span><span class="arrow">›</span></div>
+        <div class="fold-row"><span>교직정보</span><span class="arrow">›</span></div>
+        <div class="fold-row"><span>경력정보</span><span class="arrow">›</span></div>
+      </section>
+    </div>
+  </main>
+</div>
 </body>
+</html>
