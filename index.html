@@ -237,6 +237,85 @@ body{
   font-size:13px;
 }
 .arrow{color:#999;font-size:18px}
+@media (max-width: 900px) {
+  body { font-size: 13px; background:#eef1f6; }
+
+  .header {
+    height: 56px;
+    padding: 0 14px;
+  }
+  .logo { font-size: 17px; gap: 8px; }
+  .logo-mark { width: 34px;height: 34px;font-size: 16px; }
+  .top-menu { gap: 10px; font-size: 11px; }
+  .badge, .logout { padding: 4px 10px; }
+
+  .page { flex-direction: column; min-height: auto; }
+
+  /* 좌측 메뉴 숨기고 필요하면 상단/하단에 넣는 방식 */
+  .sidebar { display:none; }
+
+  .tabbar {
+    height: 46px;
+    padding-left: 14px;
+  }
+  .top-tab {
+    height: 32px;
+    padding: 9px 12px;
+  }
+  .iconbar { padding: 0 14px; height: 34px; }
+
+  .content {
+    width: 100%;
+    padding: 12px 12px 40px;
+  }
+
+  .card {
+    border-radius: 12px;
+    padding: 14px 14px;
+    box-shadow: 0 12px 24px rgba(0,0,0,.08);
+  }
+  .card.compact, .card.large { padding: 14px; }
+  .card-title { margin-bottom: 10px; font-size: 13px; }
+
+  /* 프로필은 모바일에서는 단일 컬럼 카드형 */
+  .profile-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .photo {
+    width: 100%;
+    height: auto;
+    padding: 22px 0;
+    border-radius: 12px;
+  }
+  .info-col {
+    grid-template-columns: 94px 1fr;
+    row-gap: 10px;
+    background: #f7f9fe;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #dfe7f7;
+  }
+  .info-col.divider {
+    border-left: 0;
+    padding-left: 12px;
+  }
+
+  .info-table th, .info-table td {
+    height: auto;
+    font-size: 12px;
+    line-height: 1.25;
+    padding: 10px 8px;
+  }
+  .info-table th { width: 92px; }
+
+  .accordion-head, .fold-row {
+    border-radius: 12px;
+    margin-bottom: 8px;
+  }
+
+  .btn { border-radius: 10px; padding: 6px 9px; }
+}
 </style>
 </head>
 
