@@ -238,83 +238,97 @@ body{
 }
 .arrow{color:#999;font-size:18px}
 @media (max-width: 900px) {
-  body { font-size: 13px; background:#eef1f6; }
+  body { font-size: 14px; background:#f3f4f7; }
 
-  .header {
-    height: 56px;
+  /* 모바일 헤더는 제목만 */
+  .header{
+    height: 66px;
     padding: 0 14px;
   }
-  .logo { font-size: 17px; gap: 8px; }
-  .logo-mark { width: 34px;height: 34px;font-size: 16px; }
-  .top-menu { gap: 10px; font-size: 11px; }
-  .badge, .logout { padding: 4px 10px; }
+  .top-menu{ display:none; }
+  .logo{ font-size: 18px; }
+  .logo small{ font-size: 10px; opacity:.9; }
 
-  .page { flex-direction: column; min-height: auto; }
+  /* PC용 탭바/아이콘바 숨김 */
+  .tabbar{ display:none; }
+  .iconbar{ display:none; }
 
-  /* 좌측 메뉴 숨기고 필요하면 상단/하단에 넣는 방식 */
-  .sidebar { display:none; }
-
-  .tabbar {
-    height: 46px;
-    padding-left: 14px;
-  }
-  .top-tab {
-    height: 32px;
-    padding: 9px 12px;
-  }
-  .iconbar { padding: 0 14px; height: 34px; }
-
-  .content {
-    width: 100%;
+  /* 레이아웃 */
+  .page{ flex-direction: column; min-height:auto; }
+  .sidebar{ display:none; }
+  .content{
+    width:100%;
     padding: 12px 12px 40px;
   }
 
-  .card {
+  /* 카드 */
+  .card{
     border-radius: 12px;
-    padding: 14px 14px;
-    box-shadow: 0 12px 24px rgba(0,0,0,.08);
+    padding: 14px;
+    border:1px solid #d8dfe7;
+    box-shadow: 0 10px 22px rgba(0,0,0,.08);
   }
   .card.compact, .card.large { padding: 14px; }
-  .card-title { margin-bottom: 10px; font-size: 13px; }
-
-  /* 프로필은 모바일에서는 단일 컬럼 카드형 */
-  .profile-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
+  .card-title { margin-bottom: 12px; }
+  .btn{
+    border-color:#0d5cff;
+    color:#0d5cff;
+    background:#fff;
+    border-radius: 12px;
+    padding: 6px 10px;
   }
-  .photo {
-    width: 100%;
-    height: auto;
+
+  /* 프로필은 컬럼 카드형 */
+  .profile-grid{
+    display:flex;
+    flex-direction:column;
+    gap: 12px;
+  }
+  .photo{
+    width:100%;
+    height:auto;
     padding: 22px 0;
     border-radius: 12px;
+    border:none;
   }
-  .info-col {
-    grid-template-columns: 94px 1fr;
+  .seal{
+    width:60px;height:60px;
+    border:3px solid #1e5b9c;
+    border-radius:50%;
+    font-size:18px;
+  }
+
+  .info-col{
+    grid-template-columns: 110px 1fr;
     row-gap: 10px;
-    background: #f7f9fe;
-    padding: 10px 12px;
+    padding: 12px 14px;
     border-radius: 12px;
-    border: 1px solid #dfe7f7;
+    border:1px solid #dfe7f7;
+    background:#f5f8ff;
   }
-  .info-col.divider {
-    border-left: 0;
-    padding-left: 12px;
+  .info-col.divider{
+    border-left:0;
+    padding-left:14px;
   }
+  .label{ font-size:14px; color:#333; }
+  .value{ font-size:14px; font-weight:600; color:#111; }
 
-  .info-table th, .info-table td {
-    height: auto;
-    font-size: 12px;
+  /* 테이블도 글씨 키움 */
+  .info-table th, .info-table td{
+    height:auto;
+    padding: 12px 10px;
+    font-size: 14px;
     line-height: 1.25;
-    padding: 10px 8px;
   }
-  .info-table th { width: 92px; }
+  .info-table th{
+    width:110px;
+    background:#f1f4f8;
+  }
 
-  .accordion-head, .fold-row {
+  .accordion-head, .fold-row{
     border-radius: 12px;
     margin-bottom: 8px;
   }
-
-  .btn { border-radius: 10px; padding: 6px 9px; }
 }
 </style>
 </head>
