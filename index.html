@@ -4,389 +4,380 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>학적정보조회 | 학생 | 연세대학교</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, "Noto Sans KR", sans-serif;
-    }
-
+    * { box-sizing: border-box; }
     body {
-      background: #f5f6f8;
-      color: #222;
-      font-size: 14px;
+      margin: 0;
+      font-family: "Malgun Gothic", "맑은 고딕", Arial, sans-serif;
+      font-size: 12px;
+      color: #333;
+      background: #fff;
     }
 
-    .top-header {
-      height: 58px;
-      background: #ffffff;
-      border-bottom: 1px solid #d6d9df;
+    .top {
+      height: 54px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      border-bottom: 1px solid #cfd5df;
+      padding: 0 18px;
+      background: #fff;
     }
 
     .logo {
-      font-weight: 700;
-      color: #173f7a;
       font-size: 20px;
+      font-weight: 700;
+      color: #17457c;
+      letter-spacing: -1px;
     }
 
-    .header-right {
+    .top-menu {
       display: flex;
       align-items: center;
-      gap: 18px;
-      color: #333;
-      font-size: 13px;
+      gap: 14px;
+      font-size: 12px;
+      color: #222;
     }
 
     .logout {
-      background: #34495e;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 3px;
+      background: #3d4755;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 2px;
+    }
+
+    .notice {
+      height: 28px;
+      line-height: 28px;
+      background: #fff8d7;
+      border-bottom: 1px solid #e6d88b;
+      color: #5c4b00;
+      padding: 0 18px;
       font-size: 12px;
     }
 
-    .warning {
-      background: #fff8df;
-      border-bottom: 1px solid #e2d38d;
-      color: #6a5300;
-      padding: 8px 24px;
-      font-size: 13px;
-    }
-
-    .layout {
+    .wrap {
       display: flex;
-      min-height: calc(100vh - 90px);
+      min-height: calc(100vh - 82px);
     }
 
-    .sidebar {
-      width: 250px;
-      background: #28384d;
+    .side {
+      width: 235px;
+      background: #24364d;
+      color: #dce6f2;
+      padding: 12px;
+    }
+
+    .side-logo {
+      height: 42px;
+      border-bottom: 1px solid #43566f;
+      margin-bottom: 12px;
       color: #fff;
-      padding: 18px 14px;
+      font-weight: 700;
     }
 
-    .search-box {
+    .search {
       display: flex;
-      margin-bottom: 22px;
+      margin-bottom: 12px;
     }
 
-    .search-box input {
-      flex: 1;
-      padding: 8px;
-      border: none;
-      border-radius: 2px 0 0 2px;
+    .search input {
+      width: 145px;
+      height: 27px;
+      border: 0;
+      padding: 4px 6px;
     }
 
-    .search-box button {
-      padding: 8px 10px;
-      border: none;
-      background: #4b6f9f;
-      color: white;
-      border-radius: 0 2px 2px 0;
-      cursor: pointer;
-    }
-
-    .menu-section {
-      margin-bottom: 18px;
+    .search button {
+      height: 27px;
+      border: 0;
+      background: #5c7190;
+      color: #fff;
+      font-size: 11px;
+      padding: 0 8px;
     }
 
     .menu-title {
+      color: #fff;
       font-weight: 700;
-      font-size: 14px;
-      padding: 10px 8px;
-      background: #1f2c3e;
-      border-radius: 3px;
-      margin-bottom: 6px;
+      padding: 8px 4px;
+      border-top: 1px solid #42536a;
+      border-bottom: 1px solid #1c2a3c;
     }
 
     .menu-item {
-      padding: 9px 12px;
-      color: #dce4ef;
-      border-radius: 3px;
-      font-size: 13px;
+      padding: 7px 8px 7px 18px;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
 
     .menu-item.active {
-      background: #3f5f8c;
-      color: white;
+      background: #3f5c86;
+      color: #fff;
       font-weight: 700;
     }
 
-    .main {
+    .content {
       flex: 1;
-      padding: 24px 30px;
-    }
-
-    .page-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .breadcrumb {
-      font-size: 13px;
-      color: #777;
-      margin-bottom: 18px;
-    }
-
-    .card {
+      padding: 18px 22px;
       background: #fff;
-      border: 1px solid #dfe3e8;
-      margin-bottom: 18px;
     }
 
-    .card-header {
-      background: #f1f3f6;
-      border-bottom: 1px solid #dfe3e8;
-      padding: 12px 16px;
+    h1 {
+      font-size: 22px;
+      margin: 0 0 10px;
       font-weight: 700;
-      color: #1c355e;
+      color: #222;
+    }
+
+    .path {
+      color: #777;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #576b84;
+      padding-bottom: 8px;
+    }
+
+    .section {
+      margin-bottom: 12px;
+      border-top: 2px solid #697b90;
+    }
+
+    .section-head {
+      height: 33px;
+      background: #f4f5f7;
+      border-left: 1px solid #c9ced6;
+      border-right: 1px solid #c9ced6;
+      border-bottom: 1px solid #c9ced6;
+      padding: 8px 10px;
+      font-weight: 700;
+      color: #173f70;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .card-action {
-      font-size: 12px;
-      background: #5f6f86;
-      color: white;
-      padding: 5px 9px;
-      border-radius: 2px;
+    .btn {
+      background: #626d7b;
+      color: #fff;
+      font-size: 11px;
+      padding: 4px 8px;
+      font-weight: 400;
     }
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: 160px 1fr 160px 1fr;
-      border-top: 1px solid #e5e8ec;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
     }
 
-    .label,
-    .value {
-      padding: 10px 12px;
-      border-right: 1px solid #e5e8ec;
-      border-bottom: 1px solid #e5e8ec;
-      min-height: 38px;
+    th, td {
+      border: 1px solid #d2d6dc;
+      height: 31px;
+      padding: 6px 8px;
+      vertical-align: middle;
     }
 
-    .label {
-      background: #f7f8fa;
-      font-weight: 700;
+    th {
+      width: 125px;
+      background: #f1f3f6;
       color: #333;
+      font-weight: 700;
+      text-align: left;
     }
 
-    .value {
+    td {
       background: #fff;
-      color: #222;
-    }
-
-    .value.full {
-      grid-column: span 3;
     }
 
     .tabs {
       display: flex;
       flex-wrap: wrap;
-      background: #fff;
-      border: 1px solid #dfe3e8;
-      margin-top: 20px;
+      border-left: 1px solid #c8ced6;
+      border-top: 1px solid #c8ced6;
+      margin-top: 14px;
     }
 
     .tab {
-      padding: 12px 18px;
-      border-right: 1px solid #dfe3e8;
-      border-bottom: 1px solid #dfe3e8;
-      background: #f7f8fa;
-      font-size: 13px;
-      cursor: pointer;
+      min-width: 82px;
+      height: 34px;
+      line-height: 34px;
+      text-align: center;
+      background: #f2f3f5;
+      border-right: 1px solid #c8ced6;
+      border-bottom: 1px solid #c8ced6;
+      font-size: 12px;
     }
 
     .tab.active {
-      background: #1c355e;
+      background: #314b73;
       color: #fff;
       font-weight: 700;
     }
 
     .loading {
-      padding: 30px;
+      height: 64px;
+      line-height: 64px;
       text-align: center;
+      border: 1px solid #c8ced6;
+      border-top: 0;
       color: #777;
-      background: white;
-      border: 1px solid #dfe3e8;
-      border-top: none;
-    }
-
-    @media (max-width: 900px) {
-      .layout {
-        flex-direction: column;
-      }
-
-      .sidebar {
-        width: 100%;
-      }
-
-      .info-grid {
-        grid-template-columns: 140px 1fr;
-      }
-
-      .value.full {
-        grid-column: auto;
-      }
+      font-size: 12px;
     }
   </style>
 </head>
 
 <body>
-  <header class="top-header">
+  <div class="top">
     <div class="logo">연세포털서비스 YONSEI PORTAL SERVICE</div>
-
-    <div class="header-right">
+    <div class="top-menu">
       <span>학사행정</span>
       <span>사용자지원</span>
-      <span>학생(**********)</span>
-      <span>59:16</span>
+      <span>학생(**********) 전기전자공학과</span>
+      <span>59:47</span>
       <span class="logout">로그아웃</span>
     </div>
-  </header>
-
-  <div class="warning">
-    접속하신 브라우저는 시스템에 최적화되어 있지 않으며, 오류가 발생할 수 있습니다. 다른 브라우저로 접속하시기 바랍니다.
   </div>
 
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="search-box">
-        <input type="text" placeholder="메뉴 검색" />
+  <div class="notice">
+    접속하신 브라우저(IE 및 Edge IE모드)는 시스템에 최적화되어 있지 않으며, 오류가 발생할 수 있습니다.다른 브라우저(Chrome 등)로 접속하시기 바랍니다.
+  </div>
+
+  <div class="wrap">
+    <aside class="side">
+      <div class="side-logo">연세 포털 서비스<br />YONSEI PORTAL SERVICE</div>
+
+      <div class="search">
+        <input type="text" aria-label="메뉴 검색" />
         <button>SEARCH</button>
       </div>
 
-      <div class="menu-section">
-        <div class="menu-title">학적</div>
-        <div class="menu-item">마이메뉴</div>
-        <div class="menu-item">지도교수면담</div>
-        <div class="menu-item">APR</div>
-      </div>
+      <div class="menu-title">학적</div>
+      <div class="menu-item">마이메뉴</div>
+      <div class="menu-item">지도교수면담</div>
+      <div class="menu-item">APR</div>
 
-      <div class="menu-section">
-        <div class="menu-title">학생</div>
-        <div class="menu-item active">학적정보조회</div>
-        <div class="menu-item">학적부기재정정신청</div>
-        <div class="menu-item">휴학신청(대학원)</div>
-        <div class="menu-item">자원퇴학신청</div>
-        <div class="menu-item">학생설계전공신청</div>
-        <div class="menu-item">학생설계전공포기</div>
-        <div class="menu-item">학위과정변경신청</div>
-        <div class="menu-item">학위과정중단신청</div>
-      </div>
+      <div class="menu-title">학생</div>
+      <div class="menu-item active">학적정보조회</div>
+      <div class="menu-item">학적부기재정정신청</div>
+      <div class="menu-item">휴학신청(대학원)</div>
+      <div class="menu-item">자원퇴학신청</div>
+      <div class="menu-item">학생설계전공신청</div>
+      <div class="menu-item">학생설계전공포기</div>
+      <div class="menu-item">학위과정변경신청(석사-&gt;통합)</div>
+      <div class="menu-item">학위과정중단신청(통합-&gt;석사)</div>
     </aside>
 
-    <main class="main">
-      <h1 class="page-title">학적정보조회</h1>
-      <div class="breadcrumb">학적 &gt; 학생 &gt; 학적정보조회</div>
+    <main class="content">
+      <h1>학적정보조회</h1>
+      <div class="path">학적 &gt; 학생 &gt; 학적정보조회</div>
 
-      <section class="card">
-        <div class="card-header">
+      <section class="section">
+        <div class="section-head">
           <span>프로필</span>
-          <span class="card-action">개인정보변경</span>
+          <span class="btn">개인정보변경</span>
         </div>
 
-        <div class="info-grid">
-          <div class="label">학번</div>
-          <div class="value">**********</div>
-          <div class="label">성명</div>
-          <div class="value">***</div>
-
-          <div class="label">영문성명</div>
-          <div class="value">********</div>
-          <div class="label">주민등록번호</div>
-          <div class="value">******-*******</div>
-
-          <div class="label">학적상태</div>
-          <div class="value">재학</div>
-          <div class="label">소속</div>
-          <div class="value">일반대학원 전기전자공학과</div>
-
-          <div class="label">학위과정</div>
-          <div class="value">통합</div>
-          <div class="label">학기</div>
-          <div class="value">1</div>
-
-          <div class="label">국적</div>
-          <div class="value">대한민국</div>
-          <div class="label">최종학적변동일자</div>
-          <div class="value"></div>
-
-          <div class="label">휴대전화번호</div>
-          <div class="value">***-****-****</div>
-          <div class="label">전화번호</div>
-          <div class="value">***-****-****</div>
-
-          <div class="label">이메일</div>
-          <div class="value">********@yonsei.ac.kr</div>
-          <div class="label">우편번호</div>
-          <div class="value">*****</div>
-
-          <div class="label">주소</div>
-          <div class="value full">서울특별시 ********</div>
-        </div>
+        <table>
+          <tr>
+            <th>학번</th><td>**********</td>
+            <th>성명</th><td>***</td>
+          </tr>
+          <tr>
+            <th>영문성명</th><td>********</td>
+            <th>주민등록번호</th><td>******-*******</td>
+          </tr>
+          <tr>
+            <th>학적상태</th><td>재학</td>
+            <th>소속</th><td>일반대학원 전기전자공학과</td>
+          </tr>
+          <tr>
+            <th>학위과정</th><td>통합</td>
+            <th>학기</th><td>1</td>
+          </tr>
+          <tr>
+            <th>국적</th><td>대한민국</td>
+            <th>최종학적변동일자</th><td></td>
+          </tr>
+          <tr>
+            <th>휴대전화번호</th><td>***-****-****</td>
+            <th>전화번호</th><td>***-****-****</td>
+          </tr>
+          <tr>
+            <th>이메일</th><td>********@yonsei.ac.kr</td>
+            <th>우편번호</th><td>*****</td>
+          </tr>
+          <tr>
+            <th>주소</th><td colspan="3">서울 ********</td>
+          </tr>
+        </table>
       </section>
 
-      <section class="card">
-        <div class="card-header">
+      <section class="section">
+        <div class="section-head">
           <span>계좌정보</span>
-          <span class="card-action">계좌정보변경</span>
+          <span class="btn">계좌정보변경</span>
         </div>
 
-        <div class="info-grid">
-          <div class="label">은행구분</div>
-          <div class="value">******</div>
-          <div class="label">계좌번호</div>
-          <div class="value">**************</div>
-
-          <div class="label">예금주</div>
-          <div class="value">***</div>
-          <div class="label"></div>
-          <div class="value"></div>
-        </div>
+        <table>
+          <tr>
+            <th>은행구분</th><td>******</td>
+            <th>계좌번호</th><td>**************</td>
+          </tr>
+          <tr>
+            <th>예금주</th><td>***</td>
+            <th></th><td></td>
+          </tr>
+        </table>
       </section>
 
-      <section class="card">
-        <div class="card-header">학적정보</div>
+      <section class="section">
+        <div class="section-head">학적정보</div>
 
-        <div class="info-grid">
-          <div class="label">학기</div>
-          <div class="value">1</div>
-          <div class="label">진급학기</div>
-          <div class="value">1</div>
-
-          <div class="label">학기초과자</div>
-          <div class="value"></div>
-          <div class="label">휴학최대학기</div>
-          <div class="value">6</div>
-
-          <div class="label">휴학학기</div>
-          <div class="value">0</div>
-          <div class="label">지도교수명</div>
-          <div class="value">***</div>
-
-          <div class="label">종합시험 합격일자</div>
-          <div class="value"></div>
-          <div class="label">외국어시험 합격일자</div>
-          <div class="value"></div>
-
-          <div class="label">수료일자</div>
-          <div class="value"></div>
-          <div class="label">전문연구요원 응시용 학점</div>
-          <div class="value">0</div>
-        </div>
+        <table>
+          <tr>
+            <th>학기</th><td>1</td>
+            <th>진급학기</th><td>1</td>
+            <th>학기초과자</th><td></td>
+            <th>휴학최대학기</th><td>6</td>
+          </tr>
+          <tr>
+            <th>휴학학기</th><td>0</td>
+            <th>입학특기</th><td></td>
+            <th>재학특기</th><td></td>
+            <th>운동선수학기</th><td></td>
+          </tr>
+          <tr>
+            <th>증서번호</th><td></td>
+            <th>학위번호</th><td></td>
+            <th>지도교수명</th><td colspan="3">***</td>
+          </tr>
+          <tr>
+            <th>면허번호</th><td></td>
+            <th>본과입학일자</th><td></td>
+            <th>예과수료일자</th><td></td>
+            <th>종합시험<br />합격일자</th><td></td>
+          </tr>
+          <tr>
+            <th>외국어시험<br />합격일자</th><td></td>
+            <th>수료/전문연구</th><td></td>
+            <th>수료일자</th><td></td>
+            <th>연구소</th><td></td>
+          </tr>
+          <tr>
+            <th>96학칙적용자</th><td></td>
+            <th>ABEEK대상자</th><td></td>
+            <th>전문연구요원 응시용 학점<br />(통합4학기 누적GPA 백분율 환산점수)</th><td>0</td>
+            <th>장애유형</th><td></td>
+          </tr>
+          <tr>
+            <th>장애정도</th><td></td>
+            <th>특수교육대상자<br />(「장애인복지법」 등록)</th><td></td>
+            <th>기준외 장애학생<br />(「장애인복지법」 미등록)</th><td colspan="3"></td>
+          </tr>
+        </table>
       </section>
 
-      <nav class="tabs">
+      <div class="tabs">
         <div class="tab active">입학정보</div>
         <div class="tab">학적변동</div>
         <div class="tab">전공정보</div>
@@ -400,7 +391,7 @@
         <div class="tab">교환학생</div>
         <div class="tab">학력정보</div>
         <div class="tab">경력정보</div>
-      </nav>
+      </div>
 
       <div class="loading">LOADING...</div>
     </main>
